@@ -27,20 +27,20 @@ export default function Homepage({
 }: HomepageProps) {
   const windowSize = useWindowSize()
   const user = useUser()
-  const [showBanner, setShowBanner] = useState(false)
+  const [showBanner, setShowBanner] = useState(true)
   return (
     <>
       <div className="fixed w-full z-10">
         {showBanner && (
           <div className="hidden sm:block bg-primary text-black p-3 sm:p-7 text-center font-semibold text-lg relative">
-            ⚡️ Today we&apos;re launching the ClipDrop Figma plugin ⚡️
+            Today we&apos;re launching ClipDrop Relight 💡
             <a
               className="underline pl-2"
-              href="https://www.producthunt.com/posts/clipdrop-figma-plugin"
+              href="https://www.producthunt.com/posts/clipdrop-relight"
               target="_blank"
               rel="noreferrer dofollow"
             >
-              Try Cleanup inside Figma
+              Try Cleanup Relight
             </a>
             <div className="absolute right-1 top-0 h-full flex items-center">
               <Button
