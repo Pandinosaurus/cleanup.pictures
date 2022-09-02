@@ -1,3 +1,4 @@
+import * as Amplitude from '@amplitude/analytics-browser'
 import * as Sentry from '@sentry/react'
 import {
   Analytics,
@@ -52,6 +53,14 @@ export default function FirebaseProvider(props: Props) {
   const { children } = props
   const [state, setState] = useState<Firebase>()
 
+  // Initialize Amplitude
+  useEffect(() => {
+    if (!process.env.REACT_APP_AMPLITUDE_KEY) {
+      throw new Error('Amplitude key is not set')
+    }
+    Amplitude.init(process.env.REACT_APP_AMPLITUDE_KEY)
+  }, [])
+
   useEffect(() => {
     const app = initializeApp(firebaseConfig)
     const analytics = getAnalytics(app)
@@ -75,8 +84,10 @@ export default function FirebaseProvider(props: Props) {
       if (IS_DEV) {
         // eslint-disable-next-line
         console.log('Analytics Debug:', event, data)
+        return
       }
       analyticsLogEvent(analytics, event, data)
+      Amplitude.track(event, data)
     }
 
     const getAppCheckToken = async () => {
