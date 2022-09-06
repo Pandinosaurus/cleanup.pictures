@@ -49,14 +49,19 @@ export function shareImage(base64: string, name: string) {
   const shareData = {
     files: filesArray,
   }
-  // eslint-disable-nextline
   const nav: any = navigator
   const canShare = nav.canShare && nav.canShare(shareData)
   const userAgent = navigator.userAgent || navigator.vendor
   const isMobile = /android|iPad|iPhone|iPod/i.test(userAgent)
   if (canShare && isMobile) {
-    navigator.share(shareData)
-    return true
+    try {
+      navigator.share(shareData)
+      return true
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+      return false
+    }
   }
   return false
 }
