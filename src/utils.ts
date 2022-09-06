@@ -1,4 +1,4 @@
-import Sentry from '@sentry/react'
+import * as Sentry from '@sentry/react'
 import { useEffect, useState } from 'react'
 
 export function dataURItoBlob(dataURI: string) {
