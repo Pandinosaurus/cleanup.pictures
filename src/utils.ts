@@ -50,7 +50,6 @@ export function shareImage(base64: string, name: string) {
   const shareData = {
     files: filesArray,
   }
-  // eslint-disable-next-line
   const nav: any = navigator
   const canShare = nav.canShare && nav.canShare(shareData)
   const userAgent = navigator.userAgent || navigator.vendor
